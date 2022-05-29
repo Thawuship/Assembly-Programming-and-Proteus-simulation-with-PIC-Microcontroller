@@ -1,5 +1,7 @@
 # Half Adder program with PIC16F84A
 
+![image](https://user-images.githubusercontent.com/49475559/170858763-233c2439-3173-4b80-a007-5bb047a830e3.png)
+
 A = 0, B = 0 => C = 0, S = 0
 
 ![A0, B0](https://user-images.githubusercontent.com/49475559/170858181-5c1f897c-d470-4b85-ae73-fa955fa123f7.png)
