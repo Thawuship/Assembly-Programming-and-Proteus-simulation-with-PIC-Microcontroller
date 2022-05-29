@@ -1,0 +1,214 @@
+MPASM  5.50                     HALFADDER.ASM   5-25-2022  1:01:51         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=PIC16F84A
+                      00002 #INCLUDE <P16F84A.INC>
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F84A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00208         LIST
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   3FF1           00003 __CONFIG _XT_OSC&_PWRTE_ON&_CP_OFF&_WDT_OFF
+Warning[205]: Found directive in column 1. (ORG)
+                      00004 ORG 0X0000
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2???           00005 GOTO START 
+Warning[205]: Found directive in column 1. (ORG)
+                      00006 ORG 0X004
+Warning[203]: Found opcode in column 1. (RETFIE)
+0004   0009           00007 RETFIE
+0005   1683           00008 START BSF STATUS , RP0 ; BANK 1
+Warning[203]: Found opcode in column 1. (MOVLW)
+0006   30FF           00009 MOVLW 0XFF
+Warning[203]: Found opcode in column 1. (MOVWF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0007   0086           00010 MOVWF TRISB ; ALL PORT B IS INPUT
+Warning[203]: Found opcode in column 1. (CLRF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0008   0185           00011 CLRF TRISA  ; ALL PORT A IS ONPUT
+Warning[203]: Found opcode in column 1. (BCF)
+0009   1283           00012 BCF STATUS , RP0 ; BANK 0
+                      00013 
+000A   1886           00014 LOOP BTFSC PORTB, 1
+Warning[203]: Found opcode in column 1. (GOTO)
+000B   2???           00015 GOTO STATE_1X ; NUM2 = 1
+Warning[203]: Found opcode in column 1. (GOTO)
+000C   2???           00016 GOTO STATE_0X ; NUM2 = 0
+                      00017 
+000D   1806           00018 STATE_1X BTFSC PORTB, 0
+Warning[203]: Found opcode in column 1. (GOTO)
+000E   2???           00019 GOTO OFF1    ; NUM2 = 1, NUM1 = 1 -> C = 1, S = 0
+Warning[203]: Found opcode in column 1. (BSF)
+000F   1405           00020 BSF PORTA, 0 ; NUM2 = 1, NUM1 = 0 -> C = 0, S = 1
+Warning[203]: Found opcode in column 1. (BCF)
+0010   1085           00021 BCF PORTA, 1
+Warning[203]: Found opcode in column 1. (GOTO)
+0011   2???           00022 GOTO LOOP
+                      00023 
+0012   1C06           00024 STATE_0X BTFSS PORTB , 0
+Warning[203]: Found opcode in column 1. (GOTO)
+0013   2???           00025 GOTO OFF2    ; NUM2 = 0, NUM0 = 0 -> C = 0, S = 0
+MPASM  5.50                     HALFADDER.ASM   5-25-2022  1:01:51         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[203]: Found opcode in column 1. (BSF)
+0014   1405           00026 BSF PORTA, 0 ; NUM2 = 0, NUM0 = 1 -> C = 0, S = 1
+Warning[203]: Found opcode in column 1. (BCF)
+0015   1085           00027 BCF PORTA, 1
+Warning[203]: Found opcode in column 1. (GOTO)
+0016   2???           00028 GOTO LOOP
+                      00029 
+0017   1005           00030 OFF2 BCF PORTA ,0
+Warning[203]: Found opcode in column 1. (BCF)
+0018   1085           00031 BCF PORTA,1
+Warning[203]: Found opcode in column 1. (GOTO)
+0019   2???           00032 GOTO LOOP
+                      00033 
+001A   1005           00034 OFF1 BCF PORTA ,0
+Warning[203]: Found opcode in column 1. (BSF)
+001B   1485           00035 BSF PORTA,1
+Warning[203]: Found opcode in column 1. (GOTO)
+001C   2???           00036 GOTO LOOP
+Warning[205]: Found directive in column 1. (END)
+3FF1                  00037 END
+MPASM  5.50                     HALFADDER.ASM   5-25-2022  1:01:51         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+C                                 00000000
+DC                                00000001
+EEADR                             00000009
+EECON1                            00000088
+EECON2                            00000089
+EEDATA                            00000008
+EEIE                              00000006
+EEIF                              00000004
+F                                 00000001
+FSR                               00000004
+GIE                               00000007
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+LOOP                              0000000A
+NOT_PD                            00000003
+NOT_RBPU                          00000007
+NOT_TO                            00000004
+OFF1                              0000001A
+OFF2                              00000017
+OPTION_REG                        00000081
+PCL                               00000002
+PCLATH                            0000000A
+PORTA                             00000005
+PORTB                             00000006
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RD                                00000000
+RP0                               00000005
+RP1                               00000006
+START                             00000005
+STATE_0X                          00000012
+STATE_1X                          0000000D
+MPASM  5.50                     HALFADDER.ASM   5-25-2022  1:01:51         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+STATUS                            00000003
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+W                                 00000000
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_CONFIG                           00002007
+_CP_OFF                           00003FFF
+_CP_ON                            0000000F
+_DEVID1                           00002006
+_FOSC_EXTRC                       00003FFF
+_FOSC_HS                          00003FFE
+_FOSC_LP                          00003FFC
+_FOSC_XT                          00003FFD
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDTE_OFF                         00003FFB
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_XT_OSC                           00003FFD
+__16F84A                          00000001
+__DEBUG                           1
+
+MPASM  5.50                     HALFADDER.ASM   5-25-2022  1:01:51         PAGE  5
+
+
+
+
+
+Errors   :     0
+Warnings :    25 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
+
+
